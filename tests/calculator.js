@@ -64,4 +64,24 @@ it("Multiply Two numbers", async()=>{
   const account =await program.account.calculator.fetch(calculator.publicKey);
    assert.ok(account.result.toString() === "16");
 })
+
+it("Divide Two numbers", async()=>{
+  await program.rpc.div(new anchor.BN(4), new anchor.BN(4),{
+    accounts:{
+      calculator: calculator.publicKey
+    }
+  })
+  const account =await program.account.calculator.fetch(calculator.publicKey);
+   assert.ok(account.result.toString() === "1");
+})
+
+it("Remender Two numbers", async()=>{
+  await program.rpc.rem(new anchor.BN(41), new anchor.BN(4),{
+    accounts:{
+      calculator: calculator.publicKey
+    }
+  })
+  const account =await program.account.calculator.fetch(calculator.publicKey);
+   assert.ok(account.result.toString() === "1");
+})
 });

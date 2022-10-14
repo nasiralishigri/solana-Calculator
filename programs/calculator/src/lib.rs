@@ -26,6 +26,16 @@ pub fn mul(ctx: Context<Multiply>, num1: i64, num2: i64) -> Result<()>{
     calculator.result = num1 * num2;
     Ok(())
 }
+pub fn div(ctx: Context<Divide>, num1: i64, num2: i64) -> Result<()>{
+    let calculator = &mut ctx.accounts.calculator;
+    calculator.result = num1/num2;
+    Ok(())
+}
+pub fn rem(ctx: Context<Remainder>, num1: i64, num2: i64) -> Result<()>{
+    let calculator = &mut ctx.accounts.calculator;
+    calculator.result = num1 % num2;
+    Ok(())
+}
    
 }
 #[derive(Accounts)]
@@ -51,6 +61,16 @@ pub struct Multiply<'info>{
     #[account(mut)]
     pub calculator: Account<'info, Calculator>
 
+}
+#[derive(Accounts)]
+pub struct Divide<'info>{
+    #[account(mut)]
+    pub calculator: Account<'info, Calculator>
+}
+#[derive(Accounts)]
+pub struct Remainder<'info>{
+    #[account[mut]]
+    pub calculator: Account<'info, Calculator>
 }
 #[account]
 pub struct Calculator{
